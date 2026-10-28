@@ -1,5 +1,8 @@
 const express = require('express')
 const router = express.Router()
+const User = require("../src/models/user")
+const jwt = require("jsonwebtoken")
+
 
 router.get("/me", async (req,res)=>{
     console.log(req.cookies.token)
@@ -25,7 +28,7 @@ router.get("/me", async (req,res)=>{
     }
 })
 
-router.get("/profile/view", async (req, res) => {
+router.get("/view", async (req, res) => {
 
     const {emailId:userEmail, userId } = req.body;
     console.log(userEmail, userId)
@@ -53,7 +56,7 @@ router.get("/profile/view", async (req, res) => {
 
     }
     catch (err) {
-        res.status(500).send("something went wrong while geting data!")
+        res.status(500).send(err.message)
     }
 })
 
@@ -70,7 +73,7 @@ router.delete("/profile/remove", async (req, res) => {
     }
 })
 
-app.patch("/profile/edit", async (req, res) => {
+router.patch("/profile/edit", async (req, res) => {
 
     const { userId, ...updateData } = req.body;
 

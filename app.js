@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt')
 const cookieParser = require('cookie-parser')
 const jwt = require("jsonwebtoken")
 const authRouter = require("./routes/auth")
+const profileRouter = require("./routes/profile")
 
 
 const app = express()
@@ -15,7 +16,10 @@ app.use(cookieParser())
 
 const feed = require('./src/controller/feed')
 
+
+app.use("/profile",profileRouter)
 app.use("/",authRouter)
+
 
 
 app.get("/api/feed", feed)

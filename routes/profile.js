@@ -8,7 +8,8 @@ router.get("/me", async (req,res)=>{
     console.log(req.cookies.token)
     const token = req.cookies.token;
 
-
+    if(!token) res.send("Please logIn!")
+        
     try{
     const decoded = await jwt.verify(token,"Secret key")
 

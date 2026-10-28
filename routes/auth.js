@@ -62,4 +62,14 @@ const {emailId,password} = req.body;
 
 })
 
+router.post("/logout",(req,res)=>{
+    res.cookie (
+        "token",null,{
+            expires: new Date(Date.now())
+        }
+    )
+
+    res.send("You're logged out")
+})
+
 module.exports = router

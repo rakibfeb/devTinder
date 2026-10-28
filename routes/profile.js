@@ -85,3 +85,5 @@ app.patch("/profile/edit", async (req, res) => {
     }
 
 })
+
+module.exports = router

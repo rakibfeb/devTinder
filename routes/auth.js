@@ -1,6 +1,9 @@
 const express = require('express')
 
 const router = express.Router();
+const User = require("../src/models/user")
+const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
 
 
 
@@ -31,7 +34,7 @@ router.post("/signup", async (req, res) => {
     }
 })
 
-app.post("/login", async (req, res) => {
+router.post("/login", async (req, res) => {
 const {emailId,password} = req.body;
 
         const user = await User.findOne({emailId: emailId})
@@ -46,14 +49,17 @@ const {emailId,password} = req.body;
             res.status(400).send("password is incorrect!")
         }
         try{
-            const token = await jwt.sign({id:user._id},"Secret key")
+            const token = await jwt.sign({id:user._id},process.env.ACCESS_TOKEN)
 
         res.cookie("token", token);
         }catch(err){
             console.log(err.message)
         }
+    
         res.send("login successful!")
     
        
 
 })
+
+module.exports = router

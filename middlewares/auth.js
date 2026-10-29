@@ -1,4 +1,4 @@
-
+const jwt = require("jsonwebtoken")
 
 
 const authMiddleware=("/",async (req,res,next) =>{
@@ -15,8 +15,9 @@ const authMiddleware=("/",async (req,res,next) =>{
     if(!decoded){
         res.send("unathorized access")
     }
+    req.user={_id:decoded.id}
     userId = decoded.id
-    // console.log(decoded.id)
+    console.log(decoded)
     // req.user = userId;
     next()
 })

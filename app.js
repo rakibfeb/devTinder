@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser')
 const jwt = require("jsonwebtoken")
 const authRouter = require("./routes/auth")
 const profileRouter = require("./routes/profile")
+const requestRouter = require ("./routes/request")
 
 
 const app = express()
@@ -16,7 +17,7 @@ app.use(cookieParser())
 
 const feed = require('./src/controller/feed')
 
-
+app.use("/request",requestRouter)
 app.use("/profile",profileRouter)
 app.use("/",authRouter)
 
